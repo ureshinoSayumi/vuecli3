@@ -1,4 +1,4 @@
 
 module.exports = {
-    publicPath: '/vuecli3/',
+    publicPath: './',
   }
