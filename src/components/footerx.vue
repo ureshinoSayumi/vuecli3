@@ -90,13 +90,18 @@ export default {
 }
 .footer{
     position: fixed;
-    right: 40px;
+    height:170px;
+    width:80px;
+    border-radius:5%;
+    background:white;
+    right: 20px;
     top: 500px;
     z-index:10;
 }
 .footer img{
     width: 50px;
     height: 50px;
+    margin-top:20px;
     margin-bottom:10px;
     margin-left:15px;
 }
@@ -107,6 +112,7 @@ export default {
 
 .cart{
     position:relative;
+    margin-top:10px;
 }
 .cart-1{
     width:20px;
@@ -124,7 +130,12 @@ export default {
     font-size:15px;
 }
 .btn{
-    background:#37523d;;
+    background:#37523d;
+    margin:5px;
+    border: 1px solid #37523d;
+}
+.btn2{
+    background:#37523d;
     margin:5px;
     border: 1px solid #37523d;
 }

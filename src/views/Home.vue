@@ -2,7 +2,7 @@
 
     <div>
         <!---------------------------載入元件---------------------------------->
-        <footerx :cartNum="cartNum" :cart="cart" @goTop="top"></footerx>
+        <footerx class="footerx" :cartNum="cartNum" :cart="cart" @goTop="top"></footerx>
 
         <div class="wrap">
             <!---------------------------最新消息---------------------------------->
@@ -104,7 +104,7 @@
                 <img src="https://decomyplace.com/img/blog/170424_nordic_4.jpg">
             </div>
 
-            <div class="center-1-explanation">
+            <div class="center-1-explanation pc">
                 <img src="https://decomyplace.com/img/blog/170424_nordic_3.jpg">
                 <div class="center-1-explanation-text">
                     <h5>木質傢俱最自然｜如沐春風生活</h5>
@@ -116,6 +116,20 @@
                         讓你生活在無束縛感的空間。
                     </p>
                 </div>
+            </div>
+
+            <div class="center-1-explanation rwd">
+                <div class="center-1-explanation-text">
+                    <h5>木質傢俱最自然｜如沐春風生活</h5>
+                    <p>
+                        北歐人熱愛大自然，而這一點也充分運用到生活設計中。
+                        北歐風格中往往會用到大量的木質裝潢，並適度搭配綠植栽，
+                        使居家空間營建出自然、舒服的氣氛。而木頭材質給人溫馨、溫暖的感覺，
+                        並適時的運用地毯、布沙發與抱枕等豐富的軟裝，營造北歐風格氛圍，
+                        讓你生活在無束縛感的空間。
+                    </p>
+                </div>
+                <img src="https://decomyplace.com/img/blog/170424_nordic_3.jpg">
             </div>
 
             <div class="center-1-explanation">
@@ -227,9 +241,14 @@ export default {
 </script>
 
 <style scoped>
+img{
+    max-width: 100%;
+    height: auto;
+}
 ol, ul {
 list-style:none; }
 .wrap{
+    width: 100%;
     background: #ffffff;
 }
 .top{
@@ -268,7 +287,7 @@ list-style:none; }
     color:white;
 }
 .banner{
-    width:1100px;
+    max-width:1100px;
     margin-bottom:5px;
     display:flex;
     padding-left:110px;
@@ -289,7 +308,7 @@ list-style:none; }
 }
 .center{
     /* display:flex; */
-    width:1300px;
+    max-width:1300px;
     margin-left: auto ;
     margin-right: auto;
     /* background: pink; */
@@ -321,8 +340,9 @@ list-style:none; }
     letter-spacing: 1px;
 }
 .center-1-flex{
-    width:1250px;
+    max-width:1250px;
     display:flex;
+    flex-wrap: wrap;
     /*background:black;*/
     margin-left: auto;
     margin-right: auto;
@@ -367,7 +387,7 @@ list-style:none; }
     height:50px;
 }
 .center-1-coupon{
-    width:1250px;
+    max-width:1250px;
     margin-left: auto;
     margin-right: auto;
     background:#e7eeea;
@@ -380,19 +400,29 @@ list-style:none; }
 }
 .center-1-explanation{
     display:flex;
-    width:1250px;
+    max-width:1250px;
     margin-left: auto;
     margin-right: auto;
     background:white;
     margin-bottom:20px;
 }
+.center-1-explanation img{
+    max-width:60%;
+    height:auto;
+}
 .center-1-explanation-text{
+    width:40%;
+    height:auto;
     padding:20px;
     display:flex;
     flex-direction:column;
     justify-content:center;
     color:#37523d;
 }
+.rwd{
+    display:none;
+}
+
 .center-1-explanation-text h5{
     line-height: 24px;
     letter-spacing: 3px;
@@ -401,5 +431,48 @@ list-style:none; }
 .center-1-explanation-text p{
     line-height: 34px;
     letter-spacing: 1px;
+}
+@media(max-width:1000px){
+  .center-1-explanation{
+    flex-direction:column;
+  }
+  .center-1-explanation img{
+    max-width:100%;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .center-1-explanation-text{
+    width:100%;
+  }
+  .pc{
+    display:none;
+  }
+  .rwd{
+    display:flex;
+  }
+}
+@media(max-width:768px){
+  .banner{
+      padding:0px;
+  }
+  .banner h4{
+    display:none;
+  }
+  .banner h5{
+    font-size:10px;
+    font: inherit;
+    padding-top:2px;
+  }
+  .center-1-coupon-flex{
+    flex-direction:column;
+  }
+  .footerx{
+      display:none;
+  }
+}
+@media(max-width:375px){
+  .center-1-coupon-flex h3{
+    font-size: 20px;
+  }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="wrap">
         <loading :active.sync="isLoading"></loading>
         <div class="my-5 row justify-content-center">
             <form class="col-md-6" @submit.prevent="payOrder">
@@ -131,9 +131,18 @@ export default {
 };
 </script>
 <style scoped>
+img{
+  max-width: 100%;
+  height: auto;
+}
+.wrap{
+}
+.my-5{
+  width:100%;
+}
 .align-middle img{
-  width:192.5;
-  height:125px;
+  width:192.5px;
+  height:auto;
 }
 .text-right button{
   background:#37523d;
@@ -142,5 +151,7 @@ export default {
 .btn a{
   text-decoration:none;
   color: white;
+}
+.col-md-6{
 }
 </style>

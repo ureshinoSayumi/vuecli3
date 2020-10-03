@@ -2,16 +2,16 @@
     <div class="wrap">
       <footerx :cartNum="cartNum" :cart="cart" @goTop="top"></footerx>
         <div class="index">
-                <div>
-                    <a href="#">
-                        <router-link to="/">首頁></router-link>
-                    </a>
-                    <a href="#">
-                        <router-link to="/CustomerOrders">產品列表></router-link>
-                    </a>
-                    <a href="#">購物車清單</a>
-                </div>
+            <div>
+                <a href="#">
+                    <router-link to="/">首頁></router-link>
+                </a>
+                <a href="#">
+                    <router-link to="/CustomerOrders">產品列表></router-link>
+                </a>
+                <a href="#">購物車清單</a>
             </div>
+        </div>
         <loading :active.sync="isLoading"></loading>
         <!----------------------------購物車列表---------------------------------->
         <table class="table">
@@ -20,6 +20,7 @@
             <th>縮圖</th>
             <th>品名</th>
             <th>數量</th>
+            <th>更改數量</th>
             <th>單價</th>
           </thead>
           <tbody>
@@ -39,7 +40,17 @@
                   已套用優惠券
                 </div>
               </td>
-              <td class="align-middle">{{ item.qty }}/{{ item.product.unit }}</td>
+              <td class="align-middle">
+                {{ item.qty }}/{{ item.product.unit }}
+                </td>
+                <td class="align-middle">
+                  <select name="" class="form-control mt-2"
+                    @change="addtoCart(item.product.id, num, item.id)" v-model="num">
+                      <option :value="num" v-for="num in 10" :key="num">
+                          {{ num  }} {{ item.product.unit }}
+                        </option>
+                  </select>
+                </td>
               <td class="align-middle text-right">{{ item.final_total }}</td>
             </tr>
           </tbody>
@@ -58,7 +69,7 @@
         <div class="input">
           <ValidationProvider rules="required2" v-slot="{ errors }">
             <input type="text" class="form-control"
-              v-model="coupon_code" placeholder="請輸入優惠碼" required2>
+              v-model="coupon_code" placeholder="請輸入優惠碼(選填)" required2>
               <span class="text-danger">{{ errors[0] }}</span>
           </ValidationProvider>
           <div class="input-group-append">
@@ -74,7 +85,7 @@
             <ValidationProvider name="email" rules="required|email" v-slot="{ errors }">
 
               <input type="email" class="form-control" name="email" id="useremail"
-                v-model="form.user.email" placeholder="請輸入 Email" required>
+                v-model="form.user.email" placeholder="請輸入 Email(必填)" required>
               <span class="text-danger">{{ errors[0] }}</span>
             </ValidationProvider>
           </div>
@@ -86,7 +97,7 @@
             <label for="username">收件人姓名</label>
             <ValidationProvider rules="required" v-slot="{ errors }">
               <input type="text" class="form-control" name="name" id="username"
-                v-model="form.user.name" placeholder="請輸入姓名" required>
+                v-model="form.user.name" placeholder="請輸入姓名(必填)" required>
               <span class="text-danger">{{ errors[0] }}</span>
             </ValidationProvider>
           </div>
@@ -94,7 +105,7 @@
             <label for="usertel">收件人電話</label>
             <ValidationProvider rules="required" v-slot="{ errors }">
               <input type="text" class="form-control" id="usertel"
-                  v-model="form.user.tel" placeholder="請輸入電話" required>
+                  v-model="form.user.tel" placeholder="請輸入電話(必填)" required>
               <span class="text-danger">{{ errors[0] }}</span>
             </ValidationProvider>
           </div>
@@ -102,7 +113,7 @@
             <label for="useraddress">收件人地址</label>
             <ValidationProvider rules="required" v-slot="{ errors }">
               <input type="text" class="form-control" name="address" id="useraddress"
-                  v-model="form.user.address" placeholder="請輸入地址" required>
+                  v-model="form.user.address" placeholder="請輸入地址(必填)" required>
               <span class="text-danger">{{ errors[0] }}</span>
             </ValidationProvider>
           </div>
@@ -110,7 +121,7 @@
             <ValidationProvider rules="required2" v-slot="{ errors }">
               <label for="comment">留言</label>
               <textarea name="" id="comment" class="form-control" cols="30" rows="10"
-                  v-model="form.message" placeholder="請輸入留言" required2></textarea>
+                  v-model="form.message" placeholder="請輸入留言(選填)" required2></textarea>
               <span class="text-danger">{{ errors[0] }}</span>
             </ValidationProvider>
           </div>
@@ -151,6 +162,7 @@ export default {
   },
   data() {
     return {
+      num: '1',
       cart: [], // 購物車
       cartNum: '',
       form: { // 送出訂單
@@ -164,6 +176,9 @@ export default {
       },
       isLoading: false, // 是否讀取中(大畫面)
       coupon_code: '',
+      status: {
+        loadingItem: '', // 儲存item id 確認是否讀取中
+      },
     };
   },
   methods: {
@@ -182,7 +197,8 @@ export default {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
       vm.isLoading = true;
-      vm.$http.delete(url).then(() => {
+      vm.$http.delete(url).then((response) => {
+        console.log(response);
         vm.getCart(); // 刪除後，重新取得購物車
         vm.isLoading = false;
         $('#exampleModal').modal('show');
@@ -218,6 +234,29 @@ export default {
         vm.isLoading = false;
       });
     },
+    addtoCart(id, qty = 1, id2) {
+      const vm = this;
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+      if (vm.status.loadingItem) {
+        return;
+      }
+      vm.status.loadingItem = id;
+      const cart = { // 傳入參數1.物品ID 2.數量
+        product_id: id,
+        qty,
+      };
+      vm.$http.post(url, { data: cart }).then((response) => {
+        console.log(response);
+        vm.status.loadingItem = '';
+        vm.getCart();
+        vm.removeCartItem(id2);
+        vm.num = 1;
+        $('#exampleModal').modal('show');
+        setTimeout(() => {
+          $('#exampleModal').modal('hide');
+        }, 2000);
+      });
+    },
     top() {
       $('html,wrap').animate({
         scrollTop: 0,
@@ -232,49 +271,60 @@ export default {
 </script>
 
 <style scoped>
+img{
+  max-width: 100%;
+  height: auto;
+}
 .btn{
 }
 .index{
-    width:1063px;
-    height:40px;
-    margin-left: auto ;
-    margin-right: auto;
-    padding:10px;
-    background: #e7eeea;
-    border-radius:10px;
+  max-width:1063px;
+  height:40px;
+  margin-left: auto ;
+  margin-right: auto;
+  padding:10px;
+  background: #e7eeea;
+  border-radius:10px;
 }
 .index a{
-    color:#37523d;
+  color:#37523d;
 }
 .wrap{
-    width:1063px;
-    margin-left: auto ;
-    margin-right: auto;
+  max-width:1063px;
+  margin-left: auto ;
+  margin-right: auto;
 }
 .table{
-  width:900px;
+  max-width:900px;
   margin-left: auto;
   margin-right: auto;
 }
 .align-middle img{
-  width:192.5;
-  height:125px;
+  width:192.5px;
+  height: auto;
 }
 .text-right button{
   background:#37523d;
   border:1px solid #37523d;
 }
 .input{
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
   display:flex;
-  width:520px;
+  max-width:320px;
   height:80px;
 }
 .input input{
-  width:415px;
+  max-width:415px;
 }
 .input button{
   height:38px;
+}
+.my-5{
+  width:100%;
+}
+@media(max-width:768px){
+  .my-5{
+    margin: 0 auto;
+  }
 }
 </style>

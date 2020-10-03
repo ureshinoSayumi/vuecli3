@@ -1,6 +1,6 @@
 <template>
     <div>
-        <footerx :cartNum="cartNum" :cart="cart" @goTop="top"></footerx>
+        <footerx class="footerx" :cartNum="cartNum" :cart="cart" @goTop="top"></footerx>
         <loading :active.sync="isLoading"></loading>
         <div class="wrap">
             <div class="index">
@@ -14,7 +14,7 @@
                     <a href="#">{{ product.title }}</a>
                 </div>
             </div>
-            <h3>【{{ product.title }}】</h3>
+            <h3 class="title">【{{ product.title }}】</h3>
             <div class="product">
                 <div class="productImg">
                     <img  :src="product.imageUrl" class="img-fluid" alt="">
@@ -28,7 +28,7 @@
                         </ul>
                     </div>
                 </div>
-                <div>
+                <div class="productManu0">
                     <div class="productManu">
                         <div class="productManu-0">
                             <h6>{{ product.content }}</h6>
@@ -257,6 +257,10 @@ export default {
 </script>
 
 <style scoped>
+img{
+    max-width:100%;
+    height:auto;
+}
 ul, li{
     margin: 0;
     padding: 0;
@@ -283,17 +287,23 @@ ol, ul {
     color:#37523d;
 }
 .wrap{
-    width:1063px;
+    max-width:1063px;
     margin-left: auto ;
     margin-right: auto;
 }
 .product{
     display:flex;
     justify-content:space-around;
+    max-width:1063px;
 }
 .product img{
-    width: 462px;
-    height: 300px;
+    width:100%;
+    /*width: 462px;
+    height: 300px;*/
+}
+.productImg{
+    width:40%;
+    height:auto;
 }
 .productRemarks{
     margin-top:20px;
@@ -305,10 +315,13 @@ ol, ul {
     margin-top:10px;
     padding-left:10px;
 }
+.productManu0{
+    width:60%;
+}
 .productManu{
     margin-left:20px;
     border-radius:10px;
-    width:600px;
+    max-width:600px;
     background: #e7eeea;
     padding:15px;
 }
@@ -346,6 +359,7 @@ ol, ul {
     display:flex;
     margin-top:20px;
     margin-left:20px;
+    max-width:250px;
 }
 .productManu-5 img{
     width:20px;
@@ -368,12 +382,13 @@ ol, ul {
 }
 .center-1-flex {
     display:flex;
+    flex-wrap: wrap;
     margin-left: auto;
     margin-right: auto;
 }
-
 .center-1-flex a{
     display:block;
+    width:25%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom:50px;
@@ -385,5 +400,59 @@ ol, ul {
     font-size:13px;
     color:#37523d;
     text-align:center;
+}
+@media(max-width:768px){
+  .product{
+    flex-direction:column;
+  }
+  .title{
+    text-align:center;
+  }
+  .productImg{
+    width:57%;
+    height:auto;
+    margin:0 auto;
+  }
+  .productRemarks{
+    display:none;
+  }
+  .productManu h4{
+    font-size:17px;
+  }
+  .productManu h6{
+      font-size:13px;
+  }
+  .productManu0{
+    margin:0 auto;
+  }
+  .productManu-5{
+    margin:0 auto;
+  }
+  .center-1-flex a{
+    width:50%;
+  }
+}
+@media(max-width:375px){
+  .productImg{
+    width:90%;
+    margin-left:30px;
+  }
+  .productManu0{
+    width:95%;
+  }
+  .productManu h4{
+    font-size:13px;
+  }
+  .productManu h6{
+    font-size:10px;
+  }
+  .productManu-0{
+      display:none;
+  }
+  .center-1-flex a{
+    width:100%;
+  }
+  .footerx{
+  }
 }
 </style>

@@ -117,23 +117,39 @@ export default {
 </script>
 
 <style scoped>
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+img{
+    max-width: 100%;
+    height: auto;
+}
 ol, ul {list-style: none;}
-.footer{
-    position: fixed;
-    right: 50px;
-    top: 500px;
-    z-index:10;
-}
-.footer img{
-    width: 50px;
-    height: 50px;
-}
 .top{
+    width:100%;
     margin-bottom:20px;
     background:#37523d;
     height:70px;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 .top img{
     margin-left: 30px;
@@ -183,25 +199,20 @@ ol, ul {list-style: none;}
     margin:20px;
     border-top:1px #cccccc solid;
 }
-.bottomCommunity ul{
+.bottomCommunity{
     display:flex;
-}
-.bottomCommunity li{
-    /*margin-left: auto;
-    margin-right: auto;*/
 }
 .bottomCommunity img{
     width:40px;
     height:40px;
 }
 .copyright{
-    width:400px;
+    max-width:400px;
     margin-left: auto;
     margin-right: auto;
 }
-.copyright p{
-}
 .bottom{
+    width:100%;
     display:flex;
     justify-content:space-around;
     margin-top:20px;
@@ -244,5 +255,31 @@ ol, ul {list-style: none;}
     margin-left:30px;
     margin-top: 15px;
     height: 60px
+}
+@media(max-width:768px){
+    .top img{
+      display:none;
+    }
+    .top{
+      padding-right:10px;
+      display:flex;
+      justify-content:center;
+    }
+    .top a{
+      width:100px;
+    }
+    .bottom{
+      padding-right:10px;
+      display:flex;
+      justify-content:center;
+    }
+    .bottom .bottomCommunity{
+    }
+    .bottomA{
+      display:none;
+    }
+    .bottom .bottomUl{
+        display:none;
+    }
 }
 </style>

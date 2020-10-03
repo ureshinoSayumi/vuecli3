@@ -11,29 +11,54 @@
                 </div>
             </div>
       <div class="wrap">
-        <footerx :cartNum="cartNum" :cart="cart" @goTop="top"></footerx>
-        <div class="leftMenu"></div>
-        <div class="leftMenuFixed">
-          <ul>
+        <footerx class="footerx" :cartNum="cartNum" :cart="cart" @goTop="top"></footerx>
+        <div class="leftMenu">
+          <ul class="leftMenuUl">
                 <li><a class="leftMenuA" :class="{'active':menu.all}"
-                  href="#" @click.prevent="xxx(str);
+                  href="#" @click.prevent="search(str);
                   menu.all=true;menu.chair=false;menu.table=false;
                   menu.sofa=false;menu.bad=false;">全部商品</a></li>
 
                 <li><a class="leftMenuA" :class="{'active':menu.chair }"
-                  href="#" @click.prevent="xxx('椅子','category');
+                  href="#" @click.prevent="search('椅子','category');
                   menu.chair=true;menu.all=false;menu.table=false;
                   menu.sofa=false;menu.bad=false;">椅子</a></li>
                 <li><a class="leftMenuA" :class="{'active':menu.table}"
-                  href="#" @click.prevent="xxx('桌子','category');
+                  href="#" @click.prevent="search('桌子','category');
                   menu.table=true;menu.chair=false;menu.all=false;
                   menu.sofa=false;menu.bad=false;">桌子</a></li>
                 <li><a class="leftMenuA" :class="{'active':menu.sofa}"
-                  href="#" @click.prevent="xxx('沙發','category');
+                  href="#" @click.prevent="search('沙發','category');
                   menu.sofa=true;menu.chair=false;menu.table=false;
                   menu.all=false;menu.bad=false;">沙發</a></li>
                 <li><a class="leftMenuA" :class="{'active':menu.bad}"
-                  href="#" @click.prevent="xxx('床','category');
+                  href="#" @click.prevent="search('床','category');
+                  menu.bad=true;menu.chair=false;menu.table=false;
+                  menu.sofa=false;menu.all=false;">床</a></li>
+          </ul>
+        </div>
+        <div class="leftMenuU"></div>
+        <div class="leftMenuFixed">
+          <ul>
+                <li><a class="leftMenuA" :class="{'active':menu.all}"
+                  href="#" @click.prevent="search(str);
+                  menu.all=true;menu.chair=false;menu.table=false;
+                  menu.sofa=false;menu.bad=false;">全部商品</a></li>
+
+                <li><a class="leftMenuA" :class="{'active':menu.chair }"
+                  href="#" @click.prevent="search('椅子','category');
+                  menu.chair=true;menu.all=false;menu.table=false;
+                  menu.sofa=false;menu.bad=false;">椅子</a></li>
+                <li><a class="leftMenuA" :class="{'active':menu.table}"
+                  href="#" @click.prevent="search('桌子','category');
+                  menu.table=true;menu.chair=false;menu.all=false;
+                  menu.sofa=false;menu.bad=false;">桌子</a></li>
+                <li><a class="leftMenuA" :class="{'active':menu.sofa}"
+                  href="#" @click.prevent="search('沙發','category');
+                  menu.sofa=true;menu.chair=false;menu.table=false;
+                  menu.all=false;menu.bad=false;">沙發</a></li>
+                <li><a class="leftMenuA" :class="{'active':menu.bad}"
+                  href="#" @click.prevent="search('床','category');
                   menu.bad=true;menu.chair=false;menu.table=false;
                   menu.sofa=false;menu.all=false;">床</a></li>
           </ul>
@@ -43,10 +68,10 @@
             <!---------------------------- <Navbar></Navbar>---------------------------------->
             <loading :active.sync="isLoading"></loading>
             <div class="search">
-              <input @keyup.enter="xxx(str)" class="form-control"
+              <input @keyup.enter="search(str)" class="form-control"
                 id="usertel" v-model="str" placeholder="搜尋">
               <button class="searchButton" style="border:0;"
-                type="button" @click="xxx(str)" >
+                type="button" @click="search(str)" >
                 <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd"
                     d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0
@@ -57,13 +82,11 @@
                 </svg>
               </button>
             </div>
-            <div class="row mt-4">
-                <div class="col-md-4 mb-4" v-for="item in products" :key="item.id">
-                    <a href="#" class="card border-0 shadow-sm">
-                          <a class="cardMenuImg">
+            <div class="products">
+                <div class="card1" v-for="item in products" :key="item.id">
+                    <a href="#" class="card">
+                          <a class="cardMenuA">
                             <div class="cardMenuImg" @click.prevent="getProduct(item.id)"
-                              style="height: 250px; background-size: cover;
-                              background-position: center"
                               :style="{ backgroundImage: `url(${item.imageUrl})` }">
                             </div>
                           </a>
@@ -94,7 +117,6 @@
                     </a>
                 </div>
             </div>
-
             <div class="pagination">
               <pagination :pages="pagination" @turnPage='getProducts'></pagination>
             </div>
@@ -262,7 +284,7 @@ export default {
       });
     },
     // 搜尋
-    xxx(str, category = 'title') {
+    search(str, category = 'title') {
       const vm = this;
       // 原有產品資料清空，使用備份的productsBackup，避免二次搜尋時，原有資料被覆蓋
       vm.products = [];
@@ -305,6 +327,14 @@ export default {
 </script>
 
 <style scoped>
+ul{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
 a{
   margin: 0;
   padding: 0;
@@ -315,12 +345,31 @@ a{
   text-decoration:none;
   color:black;
 }
+
 ol, ul{
 list-style: none;
 }
 .card :hover{
 }
-.cardMenuImg :hover{
+.products{
+  display:flex;
+  /*justify-content:center;*/
+  flex-wrap: wrap;
+}
+.cardMenuImg{
+  height: 250px;
+  background-size: cover;
+  background-position:center;
+}
+.card1{
+  /*margin:0 auto;*/
+  padding:10px;
+}
+.card{
+  display:block;
+  max-width:333.3px;
+}
+.cardMenuA :hover{
   transform:scale(1.1,1.1);
 }
 .cardMenu{
@@ -372,7 +421,7 @@ list-style: none;
   color:white;
 }
 .index{
-    width:1063px;
+    max-width:1063px;
     height:40px;
     margin-left: auto ;
     margin-right: auto;
@@ -384,48 +433,47 @@ list-style: none;
     color:#37523d;
 }
 .wrap{
-  width:1430px;
+  max-width:1430px;
   margin-left: auto ;
   margin-right: auto;
   display:flex;
 }
 .leftMenu{
-  margin-top:112px;
-  margin-right:30px;
-  height:800px;
-  width:240px;
+  opacity:0;
+  margin-top:78px;
+  /*height:800px;*/
   background:white;
-}
-.leftMenu li{
-  font-size: 15px;
 }
 .leftMenuA{
   display: block;
-  width: 200px;
+  width: 150px;
   height:58px;
   text-decoration:none;
   border: 1px solid #e7eeea;
   text-align: center;
   color:#37523d;
   padding-top: 17px;
+  font-size: 15px;
 }
+
 .leftMenuFixed{
   position: fixed;
-  left: 30px;
-  top: 222px;
+  left: 42px;
+  top: 207px;
   z-index:10;
+}
+.leftMenuU{
+  /*width:150px;*/
 }
 .active{
     display: block;
     /*background:#4EFEB3;*/
-    width: 200px;
     height:58px;
     text-decoration:none;
     border: 1px solid #e7eeea;
     text-align: center;
     color:white;
     background: #37523d;
-    padding-top: 17px;
 }
 .leftMenuA:hover{
   background: #37523d;
@@ -441,8 +489,16 @@ list-style: none;
     color:white;
 }
 .main{
-  width:1063px;
+  max-width:1063px;
+  margin: 0 auto;
 }
+.col{
+  /*width:333.33px*/;
+}
+/*.card{
+  width:333.33px;
+  height:376px;
+}*/
 .search {
   display: flex;
   margin-top:30px;
@@ -452,5 +508,61 @@ list-style: none;
   border:0;
   width:150px;
   height:50px;
+}
+.pagination{
+  max-width:135px;
+  margin:0 auto;
+}
+@media(max-width:1225px){
+  .card1{
+    margin:0 auto;
+  }
+}
+@media(max-width:768px){
+  .wrap{
+    flex-direction:column;
+  }
+  .leftMenu{
+    opacity:1.0;
+    margin:0 auto;
+  }
+  .leftMenu ul{
+    display:flex;
+    /*flex-wrap:wrap;*/
+    max-width:768px;
+  }
+  .active{
+    display: block;
+    /*background:#4EFEB3;*/
+    height:58px;
+    text-decoration:none;
+    border: 1px solid #e7eeea;
+    text-align: center;
+    color:white;
+    background: #37523d;
+    padding-top: 17px;
+  }
+  .leftMenuA{
+    max-width:100px;
+    height:50px;
+    font-size: 13px;
+  }
+  .index{
+    display:none;
+  }
+  .search{
+    margin-top:10px;
+  }
+  .leftMenuFixed{
+    display: none;
+}
+}
+@media(min-width: 375px) and (max-width: 650px){
+  .leftMenuA{
+    max-width:70px;
+  }
+  .footerx{
+    display:none;
+  }
 }
 </style>

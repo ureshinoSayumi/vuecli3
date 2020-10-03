@@ -42,3 +42,12 @@ export default {
   },
 };
 </script>
+<style scoped>
+.page-link{
+  color:black;
+}
+.page-item.active .page-link{
+  background:#37523d;
+  border-color:#37523d;
+}
+</style>
