@@ -36,7 +36,7 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/admin/signin`;
       const vm = this;
       // 登入API須丟入兩個參數 1.API路徑 2.帳號密碼物件
-      this.$http.post(api, vm.user).then((response) => {
+      vm.$http.post(api, vm.user).then((response) => {
         // 如果登入成功 就把路徑改到首頁
         if (response.data.success) {
           vm.$router.push('/admin');
@@ -47,11 +47,9 @@ export default {
 };
 </script>
 <style scoped>
-    html,
-body {
+html, body {
   height: 100%;
 }
-
 body {
   display: -ms-flexbox;
   display: flex;
@@ -61,7 +59,6 @@ body {
   padding-bottom: 40px;
   background-color: #f5f5f5;
 }
-
 .form-signin {
   width: 100%;
   max-width: 330px;
@@ -90,5 +87,8 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+.btn{
+  background: #37523d;
 }
 </style>

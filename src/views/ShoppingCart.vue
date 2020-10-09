@@ -27,7 +27,7 @@
             <tr v-for="item in cart.carts" :key="item.id">
               <td class="align-middle">
                 <button type="button" class="btn btn-outline-danger btn-sm"
-                    @click="removeCartItem(item.id)">
+                    @click="removeCartItem2(item.id)">
                     <i class="far fa-trash-alt"></i>
                 </button>
               </td>
@@ -45,7 +45,8 @@
                 </td>
                 <td class="align-middle">
                   <select name="" class="form-control mt-2"
-                    @change="addtoCart(item.product.id, num, item.id)" v-model="num">
+                    @change="changeCart(item.product.id, num, item.id)" v-model="num">
+                      <option :value="num"> {{ item.qty }} {{ item.product.unit }}</option>
                       <option :value="num" v-for="num in 10" :key="num">
                           {{ num  }} {{ item.product.unit }}
                         </option>
@@ -149,6 +150,44 @@
           </div>
         </div>
       </div>
+          <!-- 彈出式Modal -->
+      <div class="modal fade" id="exampleModal2" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              優惠碼錯誤
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 彈出式Modal -->
+      <div class="modal fade" id="exampleModal3" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              已更改數量
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 </template>
 
@@ -162,7 +201,7 @@ export default {
   },
   data() {
     return {
-      num: '1',
+      num: '',
       cart: [], // 購物車
       cartNum: '',
       form: { // 送出訂單
@@ -174,6 +213,7 @@ export default {
         },
         message: '',
       },
+      merge: true,
       isLoading: false, // 是否讀取中(大畫面)
       coupon_code: '',
       status: {
@@ -182,7 +222,8 @@ export default {
     };
   },
   methods: {
-    getCart() {
+    // 取得購物車
+    getCart2() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       vm.isLoading = true;
@@ -192,14 +233,52 @@ export default {
         vm.cartNum = response.data.data.carts.length;
       });
     },
-    // 刪除購物車
+    // 取得購物車 並且合併相同產品
+    getCart() {
+      const vm = this;
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+      let qty = 0;
+      let id = '';
+      vm.isLoading = true;
+      vm.$http.get(url).then((response) => {
+        vm.isLoading = false;
+        vm.cart = response.data.data;
+        vm.cartNum = response.data.data.carts.length;
+        vm.cart.carts.forEach((item, index) => {
+          vm.cart.carts.forEach((item2, index2) => {
+            if (item2.product.title === item.product.title && index !== index2) {
+              qty = item.qty + item2.qty;
+              vm.removeCartItem(item2.id);
+              id = item2.product.id;
+              // console.log(id, qty);
+            }
+            return true;
+          });
+        });
+        if (qty) {
+          vm.addtoCart(id, qty);
+          qty = 0;
+          id = '';
+        }
+      });
+    },
+    // 刪除購物車 刪除相同產品
     removeCartItem(id) {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
       vm.isLoading = true;
-      vm.$http.delete(url).then((response) => {
-        console.log(response);
-        vm.getCart(); // 刪除後，重新取得購物車
+      vm.$http.delete(url).then(() => {
+        vm.getCart2(); // 刪除後，重新取得購物車
+        vm.isLoading = false;
+      });
+    },
+    // 刪除購物車
+    removeCartItem2(id) {
+      const vm = this;
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
+      vm.isLoading = true;
+      vm.$http.delete(url).then(() => {
+        vm.getCart2(); // 刪除後，重新取得購物車
         vm.isLoading = false;
         $('#exampleModal').modal('show');
         setTimeout(() => {
@@ -216,9 +295,15 @@ export default {
         code: vm.coupon_code,
       };
       vm.isLoading = true;
-      vm.$http.post(url, { data: coupon }).then(() => {
+      vm.$http.post(url, { data: coupon }).then((response) => {
         vm.getCart(); // 重新取得購物車
         vm.isLoading = false;
+        if (!response.data.success) {
+          $('#exampleModal2').modal('show');
+          setTimeout(() => {
+            $('#exampleModal2').modal('hide');
+          }, 2000);
+        }
       });
     },
     // 送出訂單
@@ -245,15 +330,35 @@ export default {
         product_id: id,
         qty,
       };
-      vm.$http.post(url, { data: cart }).then((response) => {
-        console.log(response);
+      vm.$http.post(url, { data: cart }).then(() => {
         vm.status.loadingItem = '';
-        vm.getCart();
-        vm.removeCartItem(id2);
+        if (id2) {
+          vm.removeCartItem(id2);
+        }
         vm.num = 1;
-        $('#exampleModal').modal('show');
+      });
+    },
+    // 更改購物車數量
+    changeCart(id, qty = 1, id2) {
+      const vm = this;
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+      if (vm.status.loadingItem) {
+        return;
+      }
+      vm.status.loadingItem = id;
+      const cart = { // 傳入參數1.物品ID 2.數量
+        product_id: id,
+        qty,
+      };
+      vm.$http.post(url, { data: cart }).then(() => {
+        vm.status.loadingItem = '';
+        if (id2) {
+          vm.removeCartItem(id2);
+        }
+        vm.num = 1;
+        $('#exampleModal3').modal('show');
         setTimeout(() => {
-          $('#exampleModal').modal('hide');
+          $('#exampleModal3').modal('hide');
         }, 2000);
       });
     },
@@ -278,7 +383,7 @@ img{
 .btn{
 }
 .index{
-  max-width:1063px;
+  max-width:910px;
   height:40px;
   margin-left: auto ;
   margin-right: auto;

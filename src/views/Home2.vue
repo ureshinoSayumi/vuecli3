@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrap">
         <div class="top">
             <router-link to="/">
                 <img src="https://upload.cc/i1/2020/09/08/Yvtk7u.jpg" alt="">
@@ -27,7 +27,7 @@
         <div class="copyright">
             <p>資料、圖片、文章來源皆來自網路，僅用來做為學習用途。</p>
         </div>
-        <div class="bottom">
+        <div class="bottom footer">
             <div  class="bottomA">
                 <router-link to="/">
                     <img src="https://upload.cc/i1/2020/09/08/Yvtk7u.jpg" alt="" class="bottomImg">
@@ -36,22 +36,22 @@
             <ul class="bottomCommunity">
                 <li>
                     <a href="#">
-                        <img src="https://upload.cc/i1/2020/09/10/4Cko89.png">
+                        <img src="https://upload.cc/i1/2020/10/07/q8Kgc6.png">
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        <img src="https://upload.cc/i1/2020/09/10/kiD4Rx.png">
+                        <img src="https://upload.cc/i1/2020/10/07/dn6mH0.png">
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        <img src="https://upload.cc/i1/2020/09/10/W4v0CO.png">
+                        <img src="https://upload.cc/i1/2020/10/07/GTiS4z.png">
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        <img src="https://upload.cc/i1/2020/09/10/LYAgjl.png">
+                        <img src="https://upload.cc/i1/2020/10/07/jX0ziN.png">
                     </a>
                 </li>
             </ul>
@@ -138,148 +138,146 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 img{
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  height: auto;
 }
 ol, ul {list-style: none;}
 .top{
-    width:100%;
-    margin-bottom:20px;
-    background:#37523d;
-    height:70px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  width:100%;
+  margin-bottom:20px;
+  background:#37523d;
+  height:70px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 .top img{
-    margin-left: 30px;
-    margin-top: 5px;
-    height: 60px;
+  margin-left: 30px;
+  margin-top: 5px;
+  height: 60px;
 }
 .top ul{
-    font-family:sans-serif;
-    display:flex;
-    margin: 15px;
+  font-family:sans-serif;
+  display:flex;
+  margin: 15px;
 }
 .top li{
 }
 .topLi a{
-    text-decoration:none;
-    font-size: 20px;
-    color: white;
-    display: block;
-    text-align: center;
-    padding-top:3px;
-    width: 120px;
-    height:40px;
+  text-decoration:none;
+  font-size: 20px;
+  color: white;
+  display: block;
+  text-align: center;
+  padding-top:3px;
+  width: 120px;
+  height:40px;
 }
 .topLi a:hover{
-    background: #e7eeea;
-    color:#37523d;
+  background: #e7eeea;
+  color:#37523d;
 }
 .cart{
-    position:relative;
+  position:relative;
 }
 .cart-1{
-    width:20px;
-    height:20px;
-    background:red;
-    z-index:9;
-    position:absolute;
-    top:15px;
-    right:40px;
-    border-radius:999em;
+  width:20px;
+  height:20px;
+  background:red;
+  z-index:9;
+  position:absolute;
+  top:15px;
+  right:40px;
+  border-radius:999em;
 }
 .cart-1 p{
-    color:white;
-    font-size:15px;
+  color:white;
+  font-size:15px;
 }
 
 .border{
-    margin:20px;
-    border-top:1px #cccccc solid;
+  margin:20px;
+  border-top:1px #cccccc solid;
 }
 .bottomCommunity{
-    display:flex;
+  display:flex;
 }
 .bottomCommunity img{
-    width:40px;
-    height:40px;
+  width:40px;
+  height:40px;
 }
 .copyright{
-    max-width:400px;
-    margin-left: auto;
-    margin-right: auto;
+  max-width:400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .bottom{
-    width:100%;
-    display:flex;
-    justify-content:space-around;
-    margin-top:20px;
-    background: #37523d;
-    /* width:50px; */
+  width:100%;
+  display:flex;
+  justify-content:space-around;
+  margin-top:20px;
+  background: #37523d;
+  /* width:50px; */
 }
 .bottom ul{
-    display:flex;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 15px;
-    width: 400px;
-    height: 60px;
-    /* border: 1px solid black; */
+  display:flex;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  width: 400px;
+  height: 60px;
+  /* border: 1px solid black; */
 }
 .bottom li{
-    /* border: 1px solid black; */
-    margin:auto;
+  /* border: 1px solid black; */
+  margin:auto;
 }
 .bottomUl a{
-    font-family:sans-serif;
-    text-decoration:none;
-    text-align: center;
-    color: white;
-    font-size: 20px;
-    display: block;
-    width: 100px;
-    height: 45px;
-    padding-top:5px;
+  font-family:sans-serif;
+  text-decoration:none;
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  display: block;
+  width: 100px;
+  height: 45px;
+  padding-top:5px;
 }
 .bottomUl a:hover{
-    background:#e7eeea;
-    color:#37523d;
+  background:#e7eeea;
+  color:#37523d;
 }
 .bottomA{
-    display:block;
-    width:450px;
+  display:block;
+  width:450px;
 }
 .bottomImg{
-    margin-left:30px;
-    margin-top: 15px;
-    height: 60px
+  margin-left:30px;
+  margin-top: 15px;
+  height: 60px
 }
 @media(max-width:768px){
-    .top img{
+  .top img{
+    display:none;
+  }
+  .top{
+    padding-right:10px;
+    display:flex;
+     justify-content:center;
+   }
+  .top a{
+    width:100px;
+  }
+  .bottom{
+    padding-right:10px;
+    display:flex;
+    justify-content:center;
+  }
+  .bottomA{
+    display:none;
+  }
+  .bottom .bottomUl{
       display:none;
-    }
-    .top{
-      padding-right:10px;
-      display:flex;
-      justify-content:center;
-    }
-    .top a{
-      width:100px;
-    }
-    .bottom{
-      padding-right:10px;
-      display:flex;
-      justify-content:center;
-    }
-    .bottom .bottomCommunity{
-    }
-    .bottomA{
-      display:none;
-    }
-    .bottom .bottomUl{
-        display:none;
-    }
+  }
 }
 </style>

@@ -1,15 +1,5 @@
 <template>
     <div>
-        <div class="index">
-                <div>
-                    <a href="#">
-                        <router-link to="/">首頁></router-link>
-                    </a>
-                    <a href="#">
-                        <router-link to="/CustomerOrders">產品列表></router-link>
-                    </a>
-                </div>
-            </div>
       <div class="wrap">
         <footerx class="footerx" :cartNum="cartNum" :cart="cart" @goTop="top"></footerx>
         <div class="leftMenu">
@@ -70,9 +60,9 @@
             <div class="search">
               <input @keyup.enter="search(str)" class="form-control"
                 id="usertel" v-model="str" placeholder="搜尋">
-              <button class="searchButton" style="border:0;"
+              <button class="searchButton" style="border:0; padding:8px;"
                 type="button" @click="search(str)" >
-                <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd"
                     d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0
                     1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
@@ -449,7 +439,8 @@ list-style: none;
   width: 150px;
   height:58px;
   text-decoration:none;
-  border: 1px solid #e7eeea;
+  border-bottom: 1px solid #cccccc;
+  background:#e7eeea;
   text-align: center;
   color:#37523d;
   padding-top: 17px;
@@ -459,7 +450,7 @@ list-style: none;
 .leftMenuFixed{
   position: fixed;
   left: 42px;
-  top: 207px;
+  top: 170px;
   z-index:10;
 }
 .leftMenuU{
@@ -501,6 +492,7 @@ list-style: none;
 }*/
 .search {
   display: flex;
+  max-width:1063px;
   margin-top:30px;
 };
 .searchButton {
@@ -521,6 +513,8 @@ list-style: none;
 @media(max-width:768px){
   .wrap{
     flex-direction:column;
+  }
+  .main{
   }
   .leftMenu{
     opacity:1.0;

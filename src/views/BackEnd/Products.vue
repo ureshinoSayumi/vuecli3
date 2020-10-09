@@ -228,15 +228,16 @@ export default {
     },
     // 打開新增產品選單
     openModal(isNew, item) {
+      const vm = this;
       if (isNew) {
-        this.tempProduct = {};
-        this.isNew = true;
+        vm.tempProduct = {};
+        vm.isNew = true;
       } else {
         // 直接使用this.tempProduct = item;的話，會因傳參考特性，讓兩個物件一樣
         // 使用Object.assign({}) 把item傳進一個空物件，避免參考特性
         // 9/3改spread
-        this.tempProduct = { ...item };
-        this.isNew = false;
+        vm.tempProduct = { ...item };
+        vm.isNew = false;
       }
       $('#productModal').modal('show');
     },
@@ -288,7 +289,7 @@ export default {
           // 所以用$set()將資料寫入
           vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl);
         } else {
-          this.$bus.$emit('message:push', response.data.message, 'danger');
+          vm.$bus.$emit('message:push', response.data.message, 'danger');
         }
       });
     },

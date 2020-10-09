@@ -139,6 +139,9 @@ export default {
     margin:5px;
     border: 1px solid #37523d;
 }
+.btn-primary{
+    width:255px;
+}
 .dropdown-menu{
     width:300px;
     padding:15px;

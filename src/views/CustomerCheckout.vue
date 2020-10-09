@@ -153,5 +153,6 @@ img{
   color: white;
 }
 .col-md-6{
+  margin-bottom: 200px;
 }
 </style>

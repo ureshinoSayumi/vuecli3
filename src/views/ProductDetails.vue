@@ -258,148 +258,142 @@ export default {
 
 <style scoped>
 img{
-    max-width:100%;
-    height:auto;
+  max-width:100%;
+  height:auto;
 }
 ul, li{
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 ol, ul {
-    list-style: none;
+  list-style: none;
 }
 .btn{
-    background:#37523d;
-    border: 1px solid #37523d;
+  background:#37523d;
+  border: 1px solid #37523d;
 }
 .index{
-    height:40px;
-    padding:10px;
-    background: #e7eeea;
-    border-radius:10px;
-    margin-bottom:15px;
+  height:40px;
+  padding:10px;
+  background: #e7eeea;
+  border-radius:10px;
+  margin-bottom:15px;
 }
 .index a{
-    color:#37523d;
+  color:#37523d;
 }
 .wrap{
-    max-width:1063px;
-    margin-left: auto ;
-    margin-right: auto;
+  max-width:1063px;
+  margin-left: auto ;
+  margin-right: auto;
 }
 .product{
-    display:flex;
-    justify-content:space-around;
-    max-width:1063px;
+  display:flex;
+  justify-content:space-around;
+  max-width:1063px;
 }
 .product img{
-    width:100%;
-    /*width: 462px;
-    height: 300px;*/
+  width:100%;
 }
 .productImg{
-    width:40%;
-    height:auto;
+  width:40%;
+  height:auto;
 }
 .productRemarks{
-    margin-top:20px;
+  margin-top:20px;
 }
 .productRemarks h5{
-    padding-left:10px;
+  padding-left:10px;
 }
 .productRemarks li{
-    margin-top:10px;
-    padding-left:10px;
+  margin-top:10px;
+  padding-left:10px;
 }
 .productManu0{
-    width:60%;
+  width:60%;
 }
 .productManu{
-    margin-left:20px;
-    border-radius:10px;
-    max-width:600px;
-    background: #e7eeea;
-    padding:15px;
+  margin-left:20px;
+  border-radius:10px;
+  max-width:600px;
+  background: #e7eeea;
+  padding:15px;
 }
 .productManu-0{
-    display:flex;
-    justify-content:space-between;
+  display:flex;
+  justify-content:space-between;
 }
 .productManu-1{
-    display:flex;
-    justify-content:space-between;
-    margin-top:10px;
-}
-.originPriceX{
+  display:flex;
+  justify-content:space-between;
+  margin-top:10px;
 }
 .originPrice{
-    text-decoration:line-through;
+  text-decoration:line-through;
 }
 .productManu-2{
-    width:150px;
+  width:150px;
 }
 .productManu-3{
-    display:flex;
-    justify-content:flex-end;
-    margin-top:20px;
+  display:flex;
+  justify-content:flex-end;
+  margin-top:20px;
 }
 .productManu-3 h6{
-    margin:10px;
+  margin:10px;
 }
 .productManu-4{
-    margin-left:20px;
-    margin-top:10px;
-    border-bottom:1px solid #cccccc;
+  margin-left:20px;
+  margin-top:10px;
+  border-bottom:1px solid #cccccc;
 }
 .productManu-5{
-    display:flex;
-    margin-top:20px;
-    margin-left:20px;
-    max-width:250px;
+  display:flex;
+  margin-top:20px;
+  margin-left:20px;
+  max-width:250px;
 }
 .productManu-5 img{
-    width:20px;
-    height:20px;
+  width:20px;
+  height:20px;
 }
 .productManu-5 li{
-    padding-left:10px;
-    margin-bottom:10px;
+  padding-left:10px;
+  margin-bottom:10px;
 }
 .productManu-5Button{
-    margin-left:auto;
-    margin-top:auto;
+  margin-left:auto;
+  margin-top:auto;
 }
 
 .Popular h5{
-    margin-top:30px;
-    padding-top:15px;
-    border-top: 1px solid #cccccc;
-    text-align:center;
+  margin-top:30px;
+  padding-top:15px;
+  border-top: 1px solid #cccccc;
+  text-align:center;
 }
 .center-1-flex {
-    display:flex;
-    flex-wrap: wrap;
-    margin-left: auto;
-    margin-right: auto;
+  display:flex;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
 }
 .center-1-flex a{
-    display:block;
-    width:25%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom:50px;
-    padding:5px;
-}
-.center-1-flex img{
+  display:block;
+  width:25%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom:50px;
+  padding:5px;
 }
 .center-1-flex h6{
-    font-size:13px;
-    color:#37523d;
-    text-align:center;
+  font-size:13px;
+  color:#37523d;
+  text-align:center;
 }
 @media(max-width:768px){
   .product{
@@ -412,6 +406,7 @@ ol, ul {
     width:57%;
     height:auto;
     margin:0 auto;
+    padding-left:20px;
   }
   .productRemarks{
     display:none;
@@ -435,7 +430,7 @@ ol, ul {
 @media(max-width:375px){
   .productImg{
     width:90%;
-    margin-left:30px;
+    margin-left:18px;
   }
   .productManu0{
     width:95%;
