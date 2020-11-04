@@ -139,6 +139,8 @@ img{
 }
 .my-5{
   width:100%;
+  display: flex;
+  min-height:100vh;
 }
 .align-middle img{
   width:192.5px;
@@ -153,6 +155,6 @@ img{
   color: white;
 }
 .col-md-6{
-  margin-bottom: 200px;
+  flex:1;
 }
 </style>

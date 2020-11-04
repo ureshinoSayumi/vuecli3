@@ -51,7 +51,7 @@ router.beforeEach((to, from, next) => {
     // 如果持續登入驗證成功 就直接通行
       if (response.data.success) {
         next();
-        console.log('驗證已登入');
+        // console.log('驗證已登入');
       } else { // 否就回到登入的頁面
         next({
           path: '/login',

@@ -1,9 +1,13 @@
 <template>
-  <div class="wrap">
-        <div class="top">
+  <div class="wrap" :class="{'active':menu}">
+        <nav class="top">
             <router-link to="/">
                 <img src="https://upload.cc/i1/2020/09/08/Yvtk7u.jpg" alt="">
             </router-link>
+            <header class="menuImg">
+                <img src="https://upload.cc/i1/2020/10/17/TKVMSv.png"
+                @click="menu = !menu">
+            </header>
             <ul class="topLi">
                 <li>
                     <a href="" target="_blank">
@@ -17,22 +21,22 @@
                 </li>
                 <li>
                     <a href="" target="_blank">
-                        <router-link to="/login">登入</router-link>
+                        <router-link to="/login">後臺登入</router-link>
                     </a>
                 </li>
             </ul>
-        </div>
+        </nav>
         <router-view></router-view>
         <div class="border"></div>
-        <div class="copyright">
+        <footer class="copyright">
             <p>資料、圖片、文章來源皆來自網路，僅用來做為學習用途。</p>
-        </div>
-        <div class="bottom footer">
-            <div  class="bottomA">
+        </footer>
+        <nav class="bottom footer">
+            <header class="bottomA">
                 <router-link to="/">
                     <img src="https://upload.cc/i1/2020/09/08/Yvtk7u.jpg" alt="" class="bottomImg">
                 </router-link>
-            </div>
+            </header>
             <ul class="bottomCommunity">
                 <li>
                     <a href="#">
@@ -68,11 +72,11 @@
                 </li>
                 <li>
                     <a href="" target="_blank">
-                        <router-link to="/login">登入</router-link>
+                        <router-link to="/login">後臺登入</router-link>
                     </a>
                 </li>
             </ul>
-        </div>
+        </nav>
   </div>
 </template>
 
@@ -90,6 +94,7 @@ export default {
       cartNum: '', //  購物車數量
       isTransform: false,
       isLoading: false, // 是否讀取中(大畫面)
+      menu: false,
     };
   },
   methods: {
@@ -110,7 +115,6 @@ export default {
       }, 700);
     },
   },
-
   created() {
   },
 };
@@ -142,6 +146,13 @@ img{
   height: auto;
 }
 ol, ul {list-style: none;}
+.btnn{
+  background:#37523d;
+  width:70px;
+  height:70px;
+  border-radius:5px;
+  border: 1px solid #37523d;
+}
 .top{
   width:100%;
   margin-bottom:20px;
@@ -152,11 +163,10 @@ ol, ul {list-style: none;}
   flex-wrap: wrap;
 }
 .top img{
-  margin-left: 30px;
   margin-top: 5px;
   height: 60px;
 }
-.top ul{
+.topLi{
   font-family:sans-serif;
   display:flex;
   margin: 15px;
@@ -194,7 +204,6 @@ ol, ul {list-style: none;}
   color:white;
   font-size:15px;
 }
-
 .border{
   margin:20px;
   border-top:1px #cccccc solid;
@@ -217,7 +226,6 @@ ol, ul {list-style: none;}
   justify-content:space-around;
   margin-top:20px;
   background: #37523d;
-  /* width:50px; */
 }
 .bottom ul{
   display:flex;
@@ -226,10 +234,8 @@ ol, ul {list-style: none;}
   margin-top: 15px;
   width: 400px;
   height: 60px;
-  /* border: 1px solid black; */
 }
 .bottom li{
-  /* border: 1px solid black; */
   margin:auto;
 }
 .bottomUl a{
@@ -237,6 +243,7 @@ ol, ul {list-style: none;}
   text-decoration:none;
   text-align: center;
   color: white;
+  background:#37523d;
   font-size: 20px;
   display: block;
   width: 100px;
@@ -256,17 +263,57 @@ ol, ul {list-style: none;}
   margin-top: 15px;
   height: 60px
 }
+.menuImg{
+  display:none;
+}
+.menuUl a{
+  text-decoration:none;
+  font-size: 20px;
+  color: white;
+  background: #37523d;
+  display: block;
+  text-align: center;
+  padding:10px 20px 10px 20px;
+}
+.menuUl a:hover{
+  background: #e7eeea;
+  color:#37523d;
+}
 @media(max-width:768px){
-  .top img{
-    display:none;
+  .menuImg{
+    margin-right:10px;
+    display:block;
   }
-  .top{
-    padding-right:10px;
-    display:flex;
-     justify-content:center;
-   }
-  .top a{
-    width:100px;
+  .topLi{
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 2.3s;
+    margin-top: 1px;
+    position: absolute;
+    z-index: 100;
+    top: 65px;
+    left: 0;
+    right: 0;
+    background: #37523d;
+    margin: 0px;
+    flex-direction:column;
+  }
+  .topLi li{
+    border-bottom:1px dashed white;
+  }
+  .topLi a{
+    text-decoration:none;
+    font-size: 20px;
+    color: white;
+    display: block;
+    text-align: center;
+    padding:10px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto
+  }
+  .active .topLi{
+    max-height: 220px
   }
   .bottom{
     padding-right:10px;
@@ -277,7 +324,16 @@ ol, ul {list-style: none;}
     display:none;
   }
   .bottom .bottomUl{
-      display:none;
+    display:none;
+  }
+  .copyright{
+    margin-left:20px;
+    margin-right:20px;
+  }
+}
+@media(max-width:414px){
+  .top img{
+    margin-left:0px;
   }
 }
 </style>

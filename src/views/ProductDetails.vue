@@ -3,7 +3,7 @@
         <footerx class="footerx" :cartNum="cartNum" :cart="cart" @goTop="top"></footerx>
         <loading :active.sync="isLoading"></loading>
         <div class="wrap">
-            <div class="index">
+            <nav class="index">
                 <div>
                     <a href="#">
                         <router-link to="/">首頁></router-link>
@@ -13,7 +13,7 @@
                     </a>
                     <a href="#">{{ product.title }}</a>
                 </div>
-            </div>
+            </nav>
             <h3 class="title">【{{ product.title }}】</h3>
             <div class="product">
                 <div class="productImg">
@@ -41,7 +41,7 @@
                                 <h4>原價 {{ product.origin_price | currency }} 元</h4>
                             </div>
                             <div class="price" v-if="product.price">
-                                <h4>網路價 {{ product.price | currency }} 元</h4>
+                                <h5>網路價 {{ product.price | currency }} 元</h5>
                             </div>
                         </div>
                         <div class="productManu-2">
@@ -396,6 +396,10 @@ ol, ul {
   text-align:center;
 }
 @media(max-width:768px){
+  .index{
+    margin-left:20px;
+    margin-right:20px;
+  }
   .product{
     flex-direction:column;
   }
@@ -403,7 +407,7 @@ ol, ul {
     text-align:center;
   }
   .productImg{
-    width:57%;
+    width:59%;
     height:auto;
     margin:0 auto;
     padding-left:20px;
@@ -421,13 +425,21 @@ ol, ul {
     margin:0 auto;
   }
   .productManu-5{
-    margin:0 auto;
+    margin-left:0 auto;
   }
   .center-1-flex a{
     width:50%;
   }
+  .Popular{
+    margin-left:20px;
+    margin-right:20px;
+  }
+  .center-1-flex{
+    margin-left:20px;
+    margin-right:20px;
+  }
 }
-@media(max-width:375px){
+@media(max-width:414px){
   .productImg{
     width:90%;
     margin-left:18px;
@@ -442,12 +454,10 @@ ol, ul {
     font-size:10px;
   }
   .productManu-0{
-      display:none;
+    display:none;
   }
-  .center-1-flex a{
+  .productManu-2{
     width:100%;
-  }
-  .footerx{
-  }
+}
 }
 </style>

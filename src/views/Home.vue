@@ -14,7 +14,7 @@
 
             <div class="center">
                 <!---------------------------bs輪播---------------------------------->
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <header id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0"
                           class="active"></li>
@@ -22,19 +22,22 @@
                         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                     </ol>
                     <div class="carousel-inner">
-                        <div class="carousel-item active" data-interval="1000">
+                        <div class="carousel-item active" data-interval="5000">
                         <router-link to="/CustomerOrders">
-                            <img src="https://upload.cc/i1/2020/10/07/VZg9Ot.jpg" class="d-block w-100" alt="...">
+                          <img src="https://upload.cc/i1/2020/11/04/UcpCRJ.jpg" class="d-block w-100" alt="...">
+                          <a href="" class="carousel-item-a">馬上購物→</a>
                         </router-link>
                         </div>
-                        <div class="carousel-item" data-interval="1000">
+                        <div class="carousel-item" data-interval="5000">
                             <router-link to="/CustomerOrders">
-                                <img src="https://upload.cc/i1/2020/10/07/wtbQ7K.jpg" class="d-block w-100" alt="...">
+                              <img src="https://upload.cc/i1/2020/11/04/QqAMGV.jpg" class="d-block w-100" alt="...">
+                              <a href="" class="carousel-item-a">馬上購物→</a>
                             </router-link>
                         </div>
-                        <div class="carousel-item" data-interval="1000">
+                        <div class="carousel-item" data-interval="5000">
                             <router-link to="/CustomerOrders">
-                                <img src="https://upload.cc/i1/2020/10/07/M9Y6z0.jpg" class="d-block w-100" alt="...">
+                              <img src="https://upload.cc/i1/2020/11/04/4PTuCq.jpg" class="d-block w-100" alt="...">
+                              <a href="" class="carousel-item-a">馬上購物→</a>
                             </router-link>
                         </div>
                     </div>
@@ -48,7 +51,7 @@
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
-                </div>
+                </header>
             </div>
 
             <div class="border"></div>
@@ -56,39 +59,42 @@
             <div class="center-1">
 
                 <div>
-                    <h1 class="centerTitle">熱銷商品</h1>
+                    <h2 class="centerTitle">熱銷商品</h2>
                     <p class="centerText">下班休憩好家具，滿足任何型態、任何地點的需求，找到最放鬆的方式，享受舒適的坐臥</p>
                 </div>
 
-                <div class="center-1-flex">
-
+                <ul class="center-1-flex">
+                  <li>
                     <router-link to="/productDetails/-MEgehvtQaiXwxJygsgR">
                         <i class="fas fa-spinner fa-spin fa-10x" v-if="isLoading"></i>
                         <img :src="products[0].imageUrl" class="d-block w-100"
                           alt="..." v-if="!isLoading">
                         <h5>{{ products[0].title }}</h5>
                     </router-link>
-
+                  </li>
+                  <li>
                     <router-link to="/productDetails/-MEgeY-fpt8JByL8Uw0r">
                         <i class="fas fa-spinner fa-spin fa-10x" v-if="isLoading"></i>
                         <img :src="products[1].imageUrl" class="d-block w-100"
                           alt="..." v-if="!isLoading">
                         <h5>{{ products[1].title }}</h5>
                     </router-link>
-
+                  </li>
+                  <li>
                     <router-link to="/productDetails/-MEgeI9pvhhvQBAsKrJT">
                         <i class="fas fa-spinner fa-spin fa-10x" v-if="isLoading"></i>
                         <img :src="products[2].imageUrl" class="d-block w-100"
                         alt="..." v-if="!isLoading">
                         <h5>{{ products[2].title }}</h5>
                     </router-link>
-                </div>
+                  </li>
+                </ul>
             </div>
             <div class="border"></div>
 
             <!---------------------------北歐風 3 大重點---------------------------------->
             <div>
-                <h1 class="centerTitle">北歐風 3 大重點！</h1>
+                <h2 class="centerTitle">北歐風 3 大重點！</h2>
             </div>
 
             <div class="center-1-explanation">
@@ -246,7 +252,14 @@ img{
   height: auto;
 }
 ol, ul {
-list-style:none; }
+  list-style:none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
 .wrap{
   width: 100%;
   background: #ffffff;
@@ -262,15 +275,11 @@ list-style:none; }
   margin-left: 30px;
   margin-top: 10px;
   height: 60px;
-  /* margin-top: 10px; */
 }
 .top ul{
   font-family:sans-serif;
   display:flex;
   margin: 15px;
-}
-.top li{
-  /* margin-right: 15px; */
 }
 .top a{
   text-decoration:none;
@@ -347,7 +356,7 @@ list-style:none; }
   margin-left: auto;
   margin-right: auto;
 }
-.center-1-flex a{
+.center-1-flex li{
   display:block;
   margin-left: auto;
   margin-right: auto;
@@ -361,8 +370,30 @@ list-style:none; }
   text-align:center;
   padding-top:10px;
 }
+.carousel-item{
+  position:relative;
+}
+.carousel-item-a{
+  text-decoration:none;
+  display:block;
+  text-align:center;
+  padding:0.5% 0% 0.5% 0%;
+  color:#37523D;
+  font-size:30px;
+  font-family: cursive;
+  width:24%;
+  background:white;
+  border-radius:50px;
+  position:absolute;
+  top:79%;
+  left:39%;
+}
+.carousel-item-a:hover{
+  background:#37523D;
+  color:white;
+}
 .border{
-  margin:40px;
+  margin:40px 20px 40px 20px;
   border-top:1px #cccccc solid;
 }
 .bottomCommunity{
@@ -452,6 +483,21 @@ list-style:none; }
   }
 }
 @media(max-width:768px){
+  .carousel-item-a{
+    font-size:20px;
+  }
+  .banner{
+    margin-left:20px;
+    margin-right:20px;
+  }
+  .center-1{
+    margin-left:20px;
+    margin-right:20px;
+  }
+  .center-1-explanation{
+    margin-left:20px;
+    margin-right:20px;
+  }
   .banner{
     padding:0px;
   }
@@ -466,8 +512,17 @@ list-style:none; }
   .center-1-coupon-flex{
     flex-direction:column;
   }
+  .center-1-coupon{
+    margin-left:20px;
+    margin-right:20px;
+  }
   .footerx{
     display:none;
+  }
+}
+@media(max-width:414px){
+  .carousel-item-a{
+    font-size:10px;
   }
 }
 @media(max-width:375px){

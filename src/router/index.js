@@ -6,7 +6,7 @@ import Order from '../views/BackEnd/Order.vue';
 import Coupon from '../views/BackEnd/Coupon.vue';
 import Login from '../views/Login.vue';
 import Home from '../views/Home.vue';
-import Home2 from '../views/Home2.vue';
+import Header from '../views/Header.vue';
 import CustomerOrders from '../views/CustomerOrders.vue';
 import CustomerCheckout from '../views/CustomerCheckout.vue';
 import ProductDetails from '../views/ProductDetails.vue';
@@ -17,8 +17,8 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'Home2',
-    component: Home2,
+    name: 'Header',
+    component: Header,
     children: [
       {
         name: 'Home', // 元件呈現的名稱
@@ -77,15 +77,6 @@ const routes = [
         meta: { requiresAuth: true }, // 導航守衛認證
       },
     ],
-  },
-
-  {
-    path: '/',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
 ];
 

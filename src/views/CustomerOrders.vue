@@ -57,7 +57,7 @@
         <div class="main">
             <!---------------------------- <Navbar></Navbar>---------------------------------->
             <loading :active.sync="isLoading"></loading>
-            <div class="search">
+            <header class="search">
               <input @keyup.enter="search(str)" class="form-control"
                 id="usertel" v-model="str" placeholder="搜尋">
               <button class="searchButton" style="border:0; padding:8px;"
@@ -71,7 +71,7 @@
                     6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
                 </svg>
               </button>
-            </div>
+            </header>
             <div class="products">
                 <div class="card1" v-for="item in products" :key="item.id">
                     <a href="#" class="card">
@@ -439,8 +439,7 @@ list-style: none;
   width: 150px;
   height:58px;
   text-decoration:none;
-  border-bottom: 1px solid #cccccc;
-  background:#e7eeea;
+  border: 1px solid #cccccc;
   text-align: center;
   color:#37523d;
   padding-top: 17px;
@@ -469,6 +468,7 @@ list-style: none;
 .leftMenuA:hover{
   background: #37523d;
   color:white;
+  transform:scale(1.1,1);
 }
 .leftMenu p{
     text-align: center;
@@ -546,17 +546,16 @@ list-style: none;
   }
   .search{
     margin-top:10px;
+    margin-left:20px;
+    margin-right:20px;
   }
   .leftMenuFixed{
     display: none;
 }
 }
-@media(min-width: 375px) and (max-width: 650px){
+@media(min-width: 320px) and (max-width: 650px){
   .leftMenuA{
     max-width:70px;
-  }
-  .footerx{
-    display:none;
   }
 }
 </style>

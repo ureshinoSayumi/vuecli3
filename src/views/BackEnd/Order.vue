@@ -130,7 +130,6 @@ export default {
       const vm = this;
       vm.isLoading = true; // 資料讀取中
       vm.$http.get(api).then((response) => {
-        console.log(response.data);
         vm.isLoading = false; // 資料讀取結束
         vm.products = response.data.orders;
         vm.pagination = response.data.pagination; // 取得資料時把pagination存起來

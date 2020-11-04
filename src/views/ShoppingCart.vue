@@ -1,7 +1,7 @@
 <template>
     <div class="wrap">
-      <footerx :cartNum="cartNum" :cart="cart" @goTop="top"></footerx>
-        <div class="index">
+      <footerx class="footerx" :cartNum="cartNum" :cart="cart" @goTop="top"></footerx>
+        <nav class="index">
             <div>
                 <a href="#">
                     <router-link to="/">首頁></router-link>
@@ -11,17 +11,17 @@
                 </a>
                 <a href="#">購物車清單</a>
             </div>
-        </div>
+        </nav>
         <loading :active.sync="isLoading"></loading>
         <!----------------------------購物車列表---------------------------------->
         <table class="table">
           <thead>
             <th></th>
-            <th>縮圖</th>
-            <th>品名</th>
-            <th>數量</th>
-            <th>更改數量</th>
-            <th>單價</th>
+            <th class="miniature">縮圖</th>
+            <th class="tableName">品名</th>
+            <th class="tableNum2">數量</th>
+            <th class="tableNum">更改數量</th>
+            <th class="tablePrice">單價</th>
           </thead>
           <tbody>
             <tr v-for="item in cart.carts" :key="item.id">
@@ -31,7 +31,7 @@
                     <i class="far fa-trash-alt"></i>
                 </button>
               </td>
-              <td class="align-middle">
+              <td class="align-middle miniature">
                 <img :src="item.product.imageUrl" >
               </td>
               <td class="align-middle">
@@ -68,11 +68,8 @@
           </tfoot>
         </table>
         <div class="input">
-          <ValidationProvider rules="required2" v-slot="{ errors }">
-            <input type="text" class="form-control"
-              v-model="coupon_code" placeholder="請輸入優惠碼(選填)" required2>
-              <span class="text-danger">{{ errors[0] }}</span>
-          </ValidationProvider>
+          <input type="text" class="form-control"
+            v-model="coupon_code" placeholder="請輸入優惠碼(選填)">
           <div class="input-group-append">
             <button class="btn btn-outline-secondary"  type="button" @click="addCouponCode" >
               套用優惠碼
@@ -119,12 +116,9 @@
             </ValidationProvider>
           </div>
           <div class="form-group">
-            <ValidationProvider rules="required2" v-slot="{ errors }">
-              <label for="comment">留言</label>
-              <textarea name="" id="comment" class="form-control" cols="30" rows="10"
-                  v-model="form.message" placeholder="請輸入留言(選填)" required2></textarea>
-              <span class="text-danger">{{ errors[0] }}</span>
-            </ValidationProvider>
+            <label for="comment">留言</label>
+            <textarea name="" id="comment" class="form-control" cols="30" rows="10"
+              v-model="form.message" placeholder="請輸入留言(選填)"></textarea>
           </div>
           <div class="text-right">
             <button class="btn btn-danger">送出訂單</button>
@@ -380,13 +374,15 @@ img{
   max-width: 100%;
   height: auto;
 }
-.btn{
+.footerx{
+  display:none;
 }
 .index{
   max-width:910px;
   height:40px;
   margin-left: auto ;
   margin-right: auto;
+  margin-bottom: 30px;
   padding:10px;
   background: #e7eeea;
   border-radius:10px;
@@ -422,14 +418,44 @@ img{
   max-width:415px;
 }
 .input button{
+  width:110px;
   height:38px;
 }
 .my-5{
   width:100%;
 }
 @media(max-width:768px){
+  .index{
+    margin-left:20px;
+    margin-right:20px;
+  }
+  .table{
+    max-width:700px;
+  }
   .my-5{
     margin: 0 auto;
+  }
+  .tableName{
+    width:95px;
+  }
+  .tableNum{
+  }
+  .tablePrice{
+    width:0px;
+  }
+}
+@media(max-width:414px){
+  .table{
+    max-width:350px;
+  }
+  .tableName{
+    width:95px;
+  }
+  .tableNum{
+    width:105px;
+  }
+  .miniature{
+    display:none;
   }
 }
 </style>
